@@ -70,8 +70,9 @@ void HAL_GPIO_PB5_EXIT(){
     if (busy)
         return;
     get_ACCEL(&mpu);
-    //get_GYRO(&mpu);
+    get_GYRO(&mpu);
     updateAngle(&mpu);
+
 
 }
 /* USER CODE END 0 */
@@ -108,7 +109,7 @@ int main(void)
   MX_I2C1_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_Delay(20);
+
 
   u8g2Init(&u8g2);
   mpu6050_Init();
@@ -125,8 +126,6 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-
-      HAL_Delay(100);
       u8g2_SetFont(&u8g2,u8g2_font_10x20_me);
       sprintf(str,"A_x:%0.1f",mpu.angle_x);
       u8g2_DrawStr(&u8g2,5,20,str );
@@ -135,6 +134,8 @@ int main(void)
       sprintf(str,"A_z:%0.1f",mpu.angle_z);
       u8g2_DrawStr(&u8g2,5,60,str);
       u8g2_SendBuffer(&u8g2);
+      HAL_Delay(10);
+
 
   }
   /* USER CODE END 3 */

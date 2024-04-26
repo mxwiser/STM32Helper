@@ -32,7 +32,7 @@
 #define MPU6050_ADDR 0xD0	// MPU6050手册上的地址，这里也可以使用serch函数去搜索
 #define MPU_INT_EN_REG			0X38
 #define MPU_INTBP_CFG_REG		0X37
-#define dT 0.001
+#define dT 1/125.0
 #define Q_FILTER 0.01
 #include "main.h"
 

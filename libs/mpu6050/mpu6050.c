@@ -15,7 +15,7 @@ int mpu6050_Init(){
     HAL_I2C_Mem_Read(&hi2c1,MPU6050_ADDR,WHO_AM_I,1,&check,1,1000);
     if (check==0x68){
         send_cmd(PWR_MGMT_1,0x00);//唤醒
-        send_cmd(SMPLRT_DIV,0x07);// 1Khz的速率
+        send_cmd(SMPLRT_DIV,0x19);//速率
         send_cmd(ACCEL_CONFIG,0x00);// 加速度配置
         send_cmd(GYRO_CONFIG,0x00);// 陀螺配置
         send_cmd(MPU_INT_EN_REG,0x01);//开启中断
@@ -40,16 +40,16 @@ void get_ACCEL(mpu6050_t *mpu){
     mpu->accel_z= get_origin_data(ACCEL_ZOUT_H)/16384.0;
 }
 void get_GYRO(mpu6050_t *mpu){
-    mpu->gyro_x= get_origin_data(GYRO_XOUT_H);
-    mpu->gyro_y= get_origin_data(GYRO_YOUT_H);
-    mpu->gyro_z= get_origin_data(GYRO_ZOUT_H);
+    mpu->gyro_x= get_origin_data(GYRO_XOUT_H)/131*dT;
+    mpu->gyro_y= get_origin_data(GYRO_YOUT_H)/131*dT;
+    mpu->gyro_z= get_origin_data(GYRO_ZOUT_H)/131*dT;
 }
 
 void updateAngle(mpu6050_t *mpu){
    float d= sqrtf(mpu->accel_x*mpu->accel_x+mpu->accel_y*mpu->accel_y+mpu->accel_z*mpu->accel_z);
-   mpu->angle_x= acosf(mpu->accel_x/d)*57.29577*Q_FILTER + (1-Q_FILTER)*mpu->angle_x;
-   mpu->angle_y= acosf(mpu->accel_y/d)*57.29577*Q_FILTER + (1-Q_FILTER)*mpu->angle_y;
-   mpu->angle_z= acosf(mpu->accel_z/d)*57.29577*Q_FILTER + (1-Q_FILTER)*mpu->angle_z;
+   mpu->angle_x= acosf(mpu->accel_x/d)*57.29577*Q_FILTER + (1-Q_FILTER)*mpu->angle_x -mpu->gyro_x;
+   mpu->angle_y= acosf(mpu->accel_y/d)*57.29577*Q_FILTER + (1-Q_FILTER)*mpu->angle_y -mpu->gyro_y;
+   mpu->angle_z= acosf(mpu->accel_z/d)*57.29577*Q_FILTER + (1-Q_FILTER)*mpu->angle_z -mpu->gyro_z;
 }
 
 void getMpu6050Temp(mpu6050_t *mpu){
