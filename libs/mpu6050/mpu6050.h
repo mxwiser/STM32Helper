@@ -32,14 +32,28 @@
 #define MPU6050_ADDR 0xD0	// MPU6050手册上的地址，这里也可以使用serch函数去搜索
 #define MPU_INT_EN_REG			0X38
 #define MPU_INTBP_CFG_REG		0X37
+#define dT 0.001
+#define Q_FILTER 0.01
 #include "main.h"
 
 int mpu6050_Init();
+
 typedef struct {
     //need pre-setting
-    float dt;
-    float q_filter;
-    uint8_t address;
+    float accel_x;
+    float accel_y;
+    float accel_z;
+    float gyro_x;
+    float gyro_y;
+    float gyro_z;
+    float angle_x;
+    float angle_y;
+    float angle_z;
+    float temp;
 
 } mpu6050_t;
+void get_ACCEL(mpu6050_t *mpu);
+void get_GYRO(mpu6050_t *mpu);
+void getMpu6050Temp(mpu6050_t *mpu);
+void updateAngle(mpu6050_t *mpu);
 #endif //DEMO_MPU6050_H
