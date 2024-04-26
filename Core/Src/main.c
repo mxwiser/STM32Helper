@@ -110,7 +110,7 @@ int main(void)
       HAL_Delay(10);
       u8g2_SetFont(&u8g2,u8g2_font_wqy12_t_chinese1);
       u8g2_DrawStr(&u8g2,5,20,"My name is van.");
-      u8g2_DrawStr(&u8g2,5,40,"I'am artist.");
+      u8g2_DrawStr(&u8g2,5,40,"I'am artist..");
       u8g2_SendBuffer(&u8g2);
   }
   /* USER CODE END 3 */

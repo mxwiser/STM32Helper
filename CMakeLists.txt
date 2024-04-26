@@ -37,7 +37,7 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 add_executable(${CMAKE_PROJECT_NAME})
 
 # Add STM32CubeMX generated sources
-add_subdirectory(Core/Src/libs/u8g2_lib)
+add_subdirectory(libs/u8g2_lib)
 add_subdirectory(cmake/stm32cubemx)
 
 # Link directories setup
