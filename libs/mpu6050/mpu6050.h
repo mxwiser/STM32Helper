@@ -30,8 +30,16 @@
 #define PWR_MGMT_1   0x6B   // 电源管理，典型值：0x00(正常启用) */
 #define WHO_AM_I     0x75 	// IIC地址寄存器(默认数值0x68，只读) */
 #define MPU6050_ADDR 0xD0	// MPU6050手册上的地址，这里也可以使用serch函数去搜索
-
-
+#define MPU_INT_EN_REG			0X38
+#define MPU_INTBP_CFG_REG		0X37
+#include "main.h"
 
 int mpu6050_Init();
+typedef struct {
+    //need pre-setting
+    float dt;
+    float q_filter;
+    uint8_t address;
+
+} mpu6050_t;
 #endif //DEMO_MPU6050_H

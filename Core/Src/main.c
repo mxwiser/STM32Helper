@@ -62,7 +62,10 @@ static void MX_SPI1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+float ax=0,ay=0,az=0;
+void HAL_GPIO_PB5_EXIT(){
+  ax++;
+}
 /* USER CODE END 0 */
 
 /**
@@ -101,12 +104,8 @@ int main(void)
   u8g2_t u8g2;
   char str[30];
   u8g2Init(&u8g2);
-  u8g2_SetFont(&u8g2,u8g2_font_10x20_me);
-  sprintf(str,"cos x: %f",2.1);
-  u8g2_DrawStr(&u8g2,5,20,str );
-  u8g2_DrawStr(&u8g2,5,40,"cos y:");
-  u8g2_DrawStr(&u8g2,5,60,"cos z:");
-  u8g2_SendBuffer(&u8g2);
+  ax=mpu6050_Init();
+
 
   /* USER CODE END 2 */
 
@@ -117,7 +116,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      HAL_Delay(10);
+      u8g2_SetFont(&u8g2,u8g2_font_10x20_me);
+      sprintf(str,"A_x:%0.1f",ax);
+      u8g2_DrawStr(&u8g2,5,20,str );
+      sprintf(str,"A_y:%0.1f",ay);
+      u8g2_DrawStr(&u8g2,5,40,str);
+      sprintf(str,"A_z:%0.1f",az);
+      u8g2_DrawStr(&u8g2,5,60,str);
+      u8g2_SendBuffer(&u8g2);
+      HAL_Delay(100);
 
   }
   /* USER CODE END 3 */
@@ -287,6 +294,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(INT_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
