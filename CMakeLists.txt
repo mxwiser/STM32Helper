@@ -37,9 +37,9 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 add_executable(${CMAKE_PROJECT_NAME})
 
 # Add STM32CubeMX generated sources
-add_subdirectory(libs/u8g2_lib)
 add_subdirectory(cmake/stm32cubemx)
-
+add_subdirectory(libs/u8g2_lib)
+add_subdirectory(libs/mpu6050)
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -64,5 +64,6 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     u8g2
+    mpu6050
     # Add user defined libraries
 )

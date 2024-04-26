@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "u8g2.h"
 #include "u8g2_com_stm32_hw_spi_hal.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,8 +110,10 @@ int main(void)
     /* USER CODE BEGIN 3 */
       HAL_Delay(10);
       u8g2_SetFont(&u8g2,u8g2_font_wqy12_t_chinese1);
-      u8g2_DrawStr(&u8g2,5,20,"My name is van.");
-      u8g2_DrawStr(&u8g2,5,40,"I'am artist..");
+      u8g2_DrawStr(&u8g2,5,20,"cos x:");
+      u8g2_DrawStr(&u8g2,5,40,"cos y:");
+      u8g2_DrawStr(&u8g2,5,60,"cos z:");
+
       u8g2_SendBuffer(&u8g2);
   }
   /* USER CODE END 3 */
