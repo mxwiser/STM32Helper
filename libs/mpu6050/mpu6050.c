@@ -16,8 +16,8 @@ int mpu6050_Init(){
     if (check==0x68){
         send_cmd(PWR_MGMT_1,0x00);//唤醒
         send_cmd(SMPLRT_DIV,0x19);//速率
-        send_cmd(ACCEL_CONFIG,0x00);// 加速度配置
-        send_cmd(GYRO_CONFIG,0x00);// 陀螺配置
+        send_cmd(ACCEL_CONFIG,0x00);//加速度配置
+        send_cmd(GYRO_CONFIG,0x00);//陀螺配置
         send_cmd(MPU_INT_EN_REG,0x01);//开启中断
         send_cmd(MPU_INTBP_CFG_REG,0X9c);//高电平触发
         return 0;
