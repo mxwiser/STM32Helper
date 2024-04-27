@@ -127,11 +127,11 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
       u8g2_SetFont(&u8g2,u8g2_font_10x20_me);
-      sprintf(str,"A_x:%0.1f",mpu.angle_x);
+      sprintf(str,"Pitch:%0.1f",mpu.angle_x);
       u8g2_DrawStr(&u8g2,5,20,str );
-      sprintf(str,"A_y:%0.1f",mpu.angle_y);
+      sprintf(str,"Yaw:%0.1f",mpu.angle_y);
       u8g2_DrawStr(&u8g2,5,40,str);
-      sprintf(str,"A_z:%0.1f",mpu.angle_z);
+      sprintf(str,"Roll:%0.1f",mpu.angle_z);
       u8g2_DrawStr(&u8g2,5,60,str);
       u8g2_SendBuffer(&u8g2);
       HAL_Delay(10);
