@@ -1,3 +1,3 @@
 - [x] u8g2
 - [x] mpu6050
-- When using CMake to build commands, please add the "-DCMAKE_BUILD_TYPE=Release" parameter.
+- When using commands of CMake to build project, please add the "-DCMAKE_BUILD_TYPE=Release" parameter.
